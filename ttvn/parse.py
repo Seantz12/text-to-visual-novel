@@ -81,17 +81,14 @@ class Parser:
                             sentence += c if c in self.POST_STOP_CHARS else ''
                             paragraph.append(sentence.strip())
                             sentence = ""
-                        if len(paragraph) == self.LINES_PER_PARAGRAPH:
-                            self.__parsed.append(paragraph)
-                            paragraph = []
                     else:
                         sentence += c
+                    if len(paragraph) == self.LINES_PER_PARAGRAPH:
+                        self.__parsed.append(paragraph)
+                        paragraph = []
                 else:
-                    if not sentence:
-                        sentence += c if c in self.POST_STOP_CHARS else ''
-                    else:
-                        # Ignore linebreaks
-                        sentence += '' if c in self.LINEBREAK_CHARS else c
+                    # Ignore linebreaks
+                    sentence += '' if c in self.LINEBREAK_CHARS else c
             else:
                 sentence += c
         # Cleanup any buffers.
