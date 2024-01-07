@@ -2,9 +2,14 @@ from .case_1 import (
     INPUT as TEST_CASE_1_INPUT,
     EXPECTED as TEST_CASE_1_EXPECTED,
 )
+from .case_2 import (
+    INPUT as TEST_CASE_2_INPUT,
+    EXPECTED as TEST_CASE_2_EXPECTED,
+)
 
 TEST_CASES = [
     (TEST_CASE_1_INPUT, TEST_CASE_1_EXPECTED),
+    (TEST_CASE_2_INPUT, TEST_CASE_2_EXPECTED),
 ]
 
 __all__ = (

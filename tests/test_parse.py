@@ -7,9 +7,10 @@ class TestParser(TestCase):
     def setUp(self):
         self.parser = Parser()
 
-    def test_parse_case_1(self):
+    def test_parser(self):
         from tests.fixtures.parser import TEST_CASES
-        for INPUT, EXPECTED in TEST_CASES:
+        for test_case in TEST_CASES:
+            INPUT, EXPECTED = test_case
             self.parser.parse_text(INPUT)
             ACTUAL = self.parser.parsed
             self.assertEqual(ACTUAL, EXPECTED)
