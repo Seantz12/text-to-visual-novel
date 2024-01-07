@@ -4,6 +4,8 @@ from ttvn.parse import Parser
 
 class TestParser(TestCase):
 
+    maxDiff = None
+
     def setUp(self):
         self.parser = Parser()
 
