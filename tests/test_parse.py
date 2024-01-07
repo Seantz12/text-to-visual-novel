@@ -14,10 +14,3 @@ class TestParser(TestCase):
             self.parser.parse_text(INPUT)
             ACTUAL = self.parser.parsed
             self.assertEqual(ACTUAL, EXPECTED)
-
-    def test_case_3(self):
-        from tests.fixtures.parser.case_3 import INPUT
-        self.parser.parse_text(INPUT)
-        ACTUAL = self.parser.parsed
-        print(ACTUAL)
-        self.assertEqual(ACTUAL, ACTUAL)

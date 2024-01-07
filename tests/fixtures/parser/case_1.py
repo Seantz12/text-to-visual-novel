@@ -6,7 +6,6 @@ The knave replied: "Catch me if you dare..."
 "With pleasure," shot back the hunter, brandishing her blade.
 (No one moved.) (No one moved.) (No one moved.) (No one moved.) (No one moved.)
 (No one moved.) (No one moved.) (No one moved.) (No one moved.) (No one moved.)
-
 """)
 
 EXPECTED = [
