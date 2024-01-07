@@ -9,6 +9,11 @@ class Parser:
     UPPERCASE_CHARS = set("ABCDEFGHIJKLMNOPQRSTUVWXYZ")
     LOWERCASE_CHARS = set("abcdefghijklmnopqrstuvwxyz")
 
+    ALPHA_CHARS = UPPERCASE_CHARS | LOWERCASE_CHARS
+    DIGIT_CHARS = set("0123456789")
+
+    ALPHANUMERIC_CHARS = ALPHA_CHARS | DIGIT_CHARS
+
     LINES_PER_PARAGRAPH = 6
 
     def __init__(self):
@@ -39,10 +44,12 @@ class Parser:
         sentence = ""
         n = len(text)
         prev_c = None
-        for i, c in enumerate(text):
-            self.__raw += c
+        i = 0
+        while i < n:
+            c = text[i]
             prev_c = text[i - 1] if i > 0 else ''
             next_c = text[i + 1] if i < n - 1 else ''
+            self.__raw += c
 
             # We only consider a sentence possibly done if we hit
             # whitespace or 'post-stop' characters.
@@ -61,7 +68,6 @@ class Parser:
                         if paragraph:
                             self.__parsed.append(paragraph)
                             paragraph = []
-                    continue
                 elif prev_c in self.STOP_CHARS:
                     # If we are at a stop char, we should look ahead
                     # to confirm a new sentence is ahead. We do this 
@@ -71,8 +77,8 @@ class Parser:
                     look_ahead = i
                     while look_ahead < n:
                         next_c = text[look_ahead]
-                        if next_c in self.UPPERCASE_CHARS | self.LOWERCASE_CHARS:
-                            if next_c in self.UPPERCASE_CHARS:
+                        if next_c in self.ALPHANUMERIC_CHARS:
+                            if next_c in self.UPPERCASE_CHARS | self.DIGIT_CHARS:
                                 new_sentence_ahead = True
                             break
                         look_ahead += 1
@@ -91,6 +97,7 @@ class Parser:
                     sentence += '' if c in self.LINEBREAK_CHARS else c
             else:
                 sentence += c
+            i += 1
         # Cleanup any buffers.
         if sentence:
             paragraph.append(sentence)
