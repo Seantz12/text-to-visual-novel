@@ -21,7 +21,7 @@ def insert_script(script):
 
       updated_contents = file_contents.replace('script', script)
 
-   with open('game.rpy', 'w') as file:
+   with open('script.rpy', 'w') as file:
       file.write(updated_contents)
 
 
