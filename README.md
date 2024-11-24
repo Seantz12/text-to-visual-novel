@@ -1,6 +1,7 @@
 # text-to-visual-novel
 Converts text into a visual novel format (NVL style) for those who prefer to digest their information that way
 
+
 # How to use
 So the plan is, this just takes in a bunch of text, parses it into a renpy equivalent script, and then BAM.
 Simply replace a script.rpy in an already existing renpy project and you are good to go my friend.
