@@ -22,13 +22,28 @@ def search_page(query):
     input = 0
     return get_page_from_title(search_results[input])
 
+def get_parsers_from_page_title(title):
+    page = get_page_from_title(title)
+    sections = page.sections
+    unnecessary_sections = ['See also', 'Notes', 'References', 'External links', 'Further reading']
+    content_sections = [section for section in sections if section not in unnecessary_sections]
+    content_parsers = []
+    for section in content_sections:
+        content = page.section(section)
+        # not sure how to treat empty sections, skip or just make them a blank page
+        if content:
+            parser = Parser()
+            parser.parse_text(content)
+            content_parsers.append((section, parser))
+    return content_parsers
+
 # testing
 if __name__ == "__main__":
     # ok this library needs us to either parse the title from the wikipedia url, do a search, or give it the exact page title
     print("hello! we need to get the page id from a wikipedia url, or the title somehow but url is probably best!")
     test_page = get_page_from_title('Interactive Fiction')
     sections = test_page.sections
-    unnecessary_sections = ['See also', 'Notes', 'References', 'External links', 'Further Reading']
+    unnecessary_sections = ['See also', 'Notes', 'References', 'External links', 'Further reading']
     content_sections = [section for section in sections if section not in unnecessary_sections]
     content_parsers = []
     for section in content_sections:

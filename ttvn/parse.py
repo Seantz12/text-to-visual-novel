@@ -15,7 +15,7 @@ class Parser:
     ALPHANUMERIC_CHARS = ALPHA_CHARS | DIGIT_CHARS
     SENTENCE_START_CHARS = UPPERCASE_CHARS | DIGIT_CHARS
 
-    LINES_PER_PARAGRAPH = 6
+    LINES_PER_PARAGRAPH = 4
 
     def __init__(self):
         self.__raw = ""
