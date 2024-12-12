@@ -3,16 +3,6 @@ from parse import Parser
 import re
 import wikipedia
 
-
-def get_page_from_title(title):
-    # gonna have to do some error looooppppinnngggg
-    return wikipedia.page(title)
-
-def get_page_from_url(url):
-    path = urlparse(url).path
-    page_title = path.split('/')[-1]
-    return get_page_from_title(page_title) 
-    
 def get_page_from_search(search_term):
     pass
 
@@ -22,8 +12,9 @@ def search_page(query):
     input = 0
     return get_page_from_title(search_results[input])
 
-def get_parsers_from_page_title(title):
-    page = get_page_from_title(title)
+def get_page_from_title(title):
+    print(title)
+    page = wikipedia.page(f'{title}')
     sections = page.sections
     unnecessary_sections = ['See also', 'Notes', 'References', 'External links', 'Further reading']
     content_sections = [section for section in sections if section not in unnecessary_sections]
@@ -36,6 +27,11 @@ def get_parsers_from_page_title(title):
             parser.parse_text(content)
             content_parsers.append((section, parser))
     return content_parsers
+
+def get_page_from_url(url):
+    path = urlparse(url).path
+    page_title = path.split('/')[-1]
+    return get_page_from_title(page_title) 
 
 # testing
 if __name__ == "__main__":

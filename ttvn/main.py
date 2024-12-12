@@ -42,7 +42,34 @@ def generate_script(sections):
         script += "{clear}"
         script += "\n\n"
     return postparse_script(script)
+
+def generate_visual_novel(sections):
+    script = generate_script(sections)
+    insert_script(script)
+    path = './ttvn_output'
+
+    if os.path.exists(f'{path}/TTVN-1.0-pc'):
+        # DELETE IT
+        shutil.rmtree(f'{path}/TTVN-1.0-pc')
+
+    
+    with ZipFile('TTVN.zip', 'r') as zip:
+        zip.extractall(path=path)
+
+    print('now we gotta modify the script in the extracted directory...')
+    script_path = f'{path}/TTVN-1.0-pc/game/script.rpy'
+
+    os.remove(script_path)
+    shutil.copy('script.rpy', script_path)
+
+def generate_visual_novel_from_wikipedia_url(url):
+    sections = get_page_from_url(url)
+    generate_visual_novel(sections)
+
         
+def generate_visual_novel_from_wikipedia_title(title):
+    sections = get_page_from_title(title)
+    generate_visual_novel(sections)
 
 
 if __name__ == "__main__":
